@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Issue Tracker - Project Page</title>
-    <link rel="icon" type="image/png" href="https://cdn.freecodecamp.org/universal/favicons/favicon-16x16.png" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,20 +16,19 @@
         <br>
         <h3>Submit a new issue:</h3>
         <form id="newIssue" method="post" action="/api/">
-          <input type="text" name="issue_title" placeholder="*Title" style="width: 320px; margin-bottom: 3px;" required=''><br>
-          <textarea type="text" name="issue_text" placeholder="*Text" style="width: 320px; height: 100px;" required=''></textarea><br>
-          <input type="text" name="created_by" placeholder="*Created by" style="width: 100px" required=''>
-          <input type="text" name="assigned_to" placeholder="(opt)Assigned to" style="width: 100px">
-          <input type="text" name="status_text" placeholder="(opt)Status text" style="width: 100px"><br>
+          <input type="text" name="issue_title" placeholder=" *Title" style="width: 400px; margin-bottom: 3px;" required=''><br>
+          <textarea type="text" name="issue_text" placeholder=" *Text" style="width: 400px; height: 100px;" required=''></textarea><br>
+          <input type="text" name="created_by" placeholder=" *Created by" style="width: 125px" required=''>
+          <input type="text" name="assigned_to" placeholder=" (opt)Assigned to" style="width: 125px">
+          <input type="text" name="status_text" placeholder=" (opt)Status text" style="width: 125px"><br>
           <button type="submit">Submit Issue</button>
         </form>
       </div>
-      
+
       <div id='issueDisplay'></div>
-      
-      <hr style='margin: 50px; margin-top: 200px'>
+
     </center>
-    
+
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
@@ -38,7 +36,7 @@
       $(function() {
         let currentProject = window.location.pathname.replace(/\//g, "");;
         let url = "/api/issues/"+currentProject;
-        $('#projectTitle').text('All issues for: '+currentProject)
+        $('#projectTitle').text('All issues for : '+currentProject)
         $.ajax({
           type: "GET",
           url: url,
@@ -61,14 +59,14 @@
                 '<p class="id"><b>Created on:</b> '+ele.created_on+'  <b>Last updated:</b> '+ele.updated_on,
                 '<br><a href="#" class="closeIssue" id="'+ele._id+'">close?</a> <a href="#" class="deleteIssue" id="'+ele._id+'">delete?</a>',
                 '</div>'
-                
+
               ];
               issues.push(single.join(''));
             });
             $('#issueDisplay').html(issues.join(''));
           }
         });
-        
+
         $('#newIssue').submit(function(e){
           e.preventDefault();
           $(this).attr('action', "/api/issues/" + currentProject);
@@ -79,7 +77,7 @@
             success: function(data) { window.location.reload(true); }
           });
         });
-        
+
         $('#issueDisplay').on('click','.closeIssue', function(e) {
           let url = "/api/issues/"+currentProject;
           $.ajax({
