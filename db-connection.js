@@ -8,6 +8,4 @@ useNewUrlParser: true,
   console.log('connection successful');
 });
 
-console.log(mongoose.connection.readyState);
-
 module.exports = db
