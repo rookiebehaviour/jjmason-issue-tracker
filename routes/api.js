@@ -156,7 +156,29 @@ module.exports = function (app) {
 
     .delete(function (req, res){
       let project = req.params.project;
-
+      const { _id } = req.body;
+      if (!_id) {
+        res.json({ error: 'missing_id' });
+        return;
+      }
+      ProjectModel.findOne({ name: project }, (err, projectdata) => {
+        if (!projectdata || err) {
+          res.send({ error: 'could not delete', _id: _id });
+        } else {
+          const issueData = projectdata.issues.id(_id);
+          if (!issueData) {
+            res.send({ error: 'could not delete', _id: _id });
+            return;
+          }
+          issueData.remove();
+          projectdata.save((err, data) => {
+            if (err || !data) {
+              res.json({ error: 'could not delete', _id: issueData._id });
+            } else {
+              res.json({ result: 'successful deleted', _id: issueData._id });
+            }
+          });
+        }
+      });
     });
-
 };
