@@ -12,14 +12,14 @@ const IssueSchema = new Schema({
   status_text: String,
 });
 
-const Issue = mongoose.model('Issue', IssueSchema);
+const Issue = mongoose.model("Issue", IssueSchema);
 
 const ProjectSchema = new Schema({
 name: { type: String, required: true },
 issues: [IssueSchema],
 });
 
-const Project = mongoose.model('Project', ProjectSchema);
+const Project = mongoose.model("Project", ProjectSchema);
 
 exports.Issue = Issue;
 exports.Project = Project;

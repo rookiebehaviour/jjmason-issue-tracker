@@ -1,3 +1,2 @@
-# [Issue Tracker](https://www.freecodecamp.org/learn/quality-assurance/quality-assurance-projects/issue-tracker)
-
-
+# Issue Tracker
+You will need to connect to a database like MongoDB and add the url in a .env file.
